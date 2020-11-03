@@ -1,5 +1,6 @@
 package com.rest.springboot_practice.controller.v1;
 
+import com.rest.springboot_practice.advice.exception.CUserNotFoundException;
 import com.rest.springboot_practice.entity.User;
 import com.rest.springboot_practice.model.response.CommonResult;
 import com.rest.springboot_practice.model.response.ListResult;
@@ -31,7 +32,7 @@ public class UserController {
     @GetMapping(value = "/user/{msrl}")
     public SingleResult<User> findUserById(@ApiParam(value = "회원번호", required = true) @PathVariable long msrl) {
         // 결과 데이터가 단일건인 경우 getBasicResult를 이용해서 결과를 출력한다.
-        return responseService.getSingleResult(userJpaRepo.findById(msrl).orElse(null));
+        return responseService.getSingleResult(userJpaRepo.findById(msrl).orElseThrow(CUserNotFoundException::new));
     }
 
     @ApiOperation(value = "회원 입력", notes = "회원을 입력한다.")
