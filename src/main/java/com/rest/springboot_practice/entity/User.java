@@ -17,7 +17,7 @@ public class User {
 
     @Id                                                         // primaryKey임을 알림
     @GeneratedValue(strategy = GenerationType.IDENTITY)         // pk 생성전략을 DB에 위임한다는 의미. (mysql로 보면 pk 필드를 auto_increment로 설정해 놓은 경우)
-    private String msrl;
+    private long msrl;
 
     @Column(nullable = false, unique = true, length = 30)       // uid column을 명시. 필수이고 유니크한 필드이며 길이는 30
     private String uid;
